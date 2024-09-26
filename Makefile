@@ -3,6 +3,8 @@ CFLAGS=-Oz -Wno-undefined-internal
 AR=emar
 RANLIB=emranlib
 PREFIX=/usr
+STACK_SIZE=65536
+ASYNCIFY_STACK_SIZE=4096
 
 OBJ=\
 	obj/pthread_create.o \
@@ -32,7 +34,9 @@ libemfiberthreads.a: $(OBJ)
 
 obj/%.o: src/%.c
 	mkdir -p obj
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -DEMFIBERTHREADS_STACK_SIZE=$(STACK_SIZE) \
+		-DEMFIBERTHREADS_ASYNCIFY_STACK_SIZE=$(ASYNCIFY_STACK_SIZE) \
+		-c $< -o $@
 
 install:
 	mkdir -p $(PREFIX)/include/sys

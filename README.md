@@ -16,6 +16,10 @@ that prefix's include directory as an `-I` flag, and link against
 pthreads will be found in place of the real pthreads, but you will still need to
 direct your software to use `-lemfiberthreads` instead of `-pthread`.
 
+By default, fiber pseudo-threads will have a 64KB stack and 4KB asyncify stack.
+This can be overridden with a `make` option: `make STACK_SIZE=131072
+ASYNCIFY_STACK_SIZE=65536`. It is not configurable at runtime.
+
 
 ## Licensing
 

@@ -18,8 +18,12 @@
 
 #include "pthread-internal.h"
 
-#define STACK_SIZE 65536
-#define ASYNCIFY_STACK_SIZE 4096
+#ifndef EMFIBERTHREADS_STACK_SIZE
+#define EMFIBERTHREADS_STACK_SIZE 65536
+#endif
+#ifndef EMFIBERTHREADS_ASYNCIFY_STACK_SIZE
+#define EMFIBERTHREADS_ASYNCIFY_STACK_SIZE 4096
+#endif
 
 struct FiberEntryArg {
     void *(*entry)(void *);
@@ -61,13 +65,13 @@ int pthread_create(
         emfiberthreads_mainFiber->list.prev = emfiberthreads_mainFiber;
 
         emfiberthreads_mainFiber->asyncifyStack = asyncifyStack =
-            calloc(ASYNCIFY_STACK_SIZE, 1);
+            calloc(EMFIBERTHREADS_ASYNCIFY_STACK_SIZE, 1);
         if (!asyncifyStack)
             return errno;
 
         emscripten_fiber_init_from_current_context(
             &emfiberthreads_mainFiber->fiber,
-            asyncifyStack, ASYNCIFY_STACK_SIZE
+            asyncifyStack, EMFIBERTHREADS_ASYNCIFY_STACK_SIZE
         );
 
         emfiberthreads_self = emfiberthreads_next = emfiberthreads_mainFiber;
@@ -80,12 +84,12 @@ int pthread_create(
     *thrPtr = thr;
 
     /* And its stacks. */
-    ret = posix_memalign(&thr->stack, 16, STACK_SIZE);
+    ret = posix_memalign(&thr->stack, 16, EMFIBERTHREADS_STACK_SIZE);
     if (ret != 0) {
         free(thr);
         return ret;
     }
-    thr->asyncifyStack = calloc(ASYNCIFY_STACK_SIZE, 1);
+    thr->asyncifyStack = calloc(EMFIBERTHREADS_ASYNCIFY_STACK_SIZE, 1);
     if (!thr->asyncifyStack) {
         ret = errno;
         free(thr->stack);
@@ -107,8 +111,8 @@ int pthread_create(
     /* Create the fiber. */
     emscripten_fiber_init(
         &thr->fiber, fiberEntry, (void *) feArg,
-        thr->stack, STACK_SIZE,
-        thr->asyncifyStack, ASYNCIFY_STACK_SIZE
+        thr->stack, EMFIBERTHREADS_STACK_SIZE,
+        thr->asyncifyStack, EMFIBERTHREADS_ASYNCIFY_STACK_SIZE
     ); 
 
     /* And add it to the runlist. */
