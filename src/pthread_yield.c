@@ -13,9 +13,6 @@
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <emscripten.h>
-#include <stdio.h>
-
 #include "pthread-internal.h"
 
 int pthread_yield() {
