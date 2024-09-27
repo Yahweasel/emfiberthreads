@@ -113,7 +113,7 @@ int pthread_once(pthread_once_t *, void (*)(void));
 #define pthread_cond_init emfiberthreads_pthread_cond_init
 int pthread_cond_init(pthread_cond_t *, const pthread_condattr_t *);
 #define pthread_cond_destroy emfiberthreads_pthread_cond_destroy
-static int pthread_cond_destroy(pthread_cond_t *cond) { (void) cond; return 0; }
+static inline int pthread_cond_destroy(pthread_cond_t *cond) { (void) cond; return 0; }
 #define pthread_cond_broadcast emfiberthreads_pthread_cond_broadcast
 int pthread_cond_broadcast(pthread_cond_t *);
 #define pthread_cond_signal emfiberthreads_pthread_cond_signal
