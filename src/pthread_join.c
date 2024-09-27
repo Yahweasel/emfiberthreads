@@ -16,6 +16,8 @@
 #include "pthread-internal.h"
 
 int pthread_join(pthread_t thr, void **ret) {
+    EMFT_INIT();
+
     while (!thr->exited) {
         /* Wait until it's exited. */
         emfiberthreads_next = emfiberthreads_self->list.next;

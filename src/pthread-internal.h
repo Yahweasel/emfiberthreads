@@ -18,7 +18,7 @@
 
 #include "../include/pthread.h"
 
-struct emfiber_pthread_t {
+struct emfiberthreads_pthread_t {
     struct emfiber_list_t list;
     emscripten_fiber_t fiber;
     void *stack, *asyncifyStack;
@@ -28,14 +28,22 @@ struct emfiber_pthread_t {
     pthread_t joined;
 };
 
+/* Initialize fiberthreads. */
+int emfiberthreads_init(void);
+#define EMFT_INIT() do { \
+    int ret = emfiberthreads_init(); \
+    if (ret != 0) \
+        return ret; \
+} while (0)
+
 /* Go to sleep on a threadlist. */
-void emfiberthreads_sleep(pthread_t *);
+int emfiberthreads_sleep(pthread_t *);
 
 /* Wake a sleeping threadlist. */
-void emfiberthreads_wake(pthread_t *);
+int emfiberthreads_wake(pthread_t *);
 
-/* The main fiber, set when the main thread creates the first fiber. */
-extern pthread_t emfiberthreads_mainFiber;
+/* The main fiber, set when the threading system initializes. */
+extern struct emfiberthreads_pthread_t emfiberthreads_mainFiber;
 
 /* The current fiber. */
 extern pthread_t emfiberthreads_self;

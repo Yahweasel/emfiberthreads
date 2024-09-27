@@ -18,10 +18,18 @@
 int pthread_yield() {
     pthread_t self;
 
+    EMFT_INIT();
+
     self = emfiberthreads_self;
     emfiberthreads_self = emfiberthreads_next;
     emfiberthreads_next = emfiberthreads_self->list.next;
     emscripten_fiber_swap(&self->fiber, &emfiberthreads_self->fiber);
+
+    if (emfiberthreads_self == &emfiberthreads_mainFiber &&
+        emfiberthreads_mainFiber.list.next == &emfiberthreads_mainFiber) {
+        /* No more threads left, clean up. */
+        emfiberthreads_self = emfiberthreads_next = NULL;
+    }
 
     return 0;
 }

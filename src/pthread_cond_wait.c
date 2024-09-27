@@ -22,7 +22,9 @@ int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex) {
     if (ret != 0)
         return ret;
 
-    emfiberthreads_sleep(&cond->waiters);
+    ret = emfiberthreads_sleep(&cond->waiters);
+    if (ret != 0)
+        return ret;
 
     ret = pthread_mutex_lock(mutex);
     if (ret != 0)

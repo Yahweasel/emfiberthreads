@@ -19,6 +19,8 @@ int pthread_cond_signal(pthread_cond_t *cond) {
     if (cond->waiters) {
         pthread_t next;
 
+        EMFT_INIT();
+
         next = cond->waiters->list.next;
 
         cond->waiters->list.prev = emfiberthreads_self;

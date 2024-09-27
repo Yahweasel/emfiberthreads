@@ -20,7 +20,7 @@
 
 /* Sufficient pthread-like API on top of Emscripten fibers */
 
-struct emfiber_pthread_t;
+struct emfiberthreads_pthread_t;
 
 /* These __DEFINED_ macros are to override musl. */
 #define __DEFINED_pthread_t 1
@@ -28,7 +28,7 @@ struct emfiber_pthread_t;
 /**
  * emfiberthread pthreads are allocated structures.
  */
-typedef struct emfiber_pthread_t *pthread_t;
+typedef struct emfiberthreads_pthread_t *pthread_t;
 
 /**
  * To rotate fibers, we keep them on a list.

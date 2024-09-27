@@ -71,7 +71,9 @@ int pthread_cond_timedwait(
         abstime->tv_sec, abstime->tv_nsec
     );
 
-    emfiberthreads_sleep(&cond->waiters);
+    ret = emfiberthreads_sleep(&cond->waiters);
+    if (ret != 0)
+        return ret;
 
     if (!timeoutReached)
         emfiberthreads_pthread_mutex_timedwait_clearTimeout(timeout);

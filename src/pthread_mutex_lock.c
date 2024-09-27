@@ -16,9 +16,13 @@
 #include "pthread-internal.h"
 
 int pthread_mutex_lock(pthread_mutex_t *mutex) {
+    int ret;
+
     while (mutex->holder) {
         /* Wait until it's free. */
-        emfiberthreads_sleep(&mutex->waiters);
+        ret = emfiberthreads_sleep(&mutex->waiters);
+        if (ret != 0)
+            return ret;
     }
 
     mutex->holder = emfiberthreads_self;

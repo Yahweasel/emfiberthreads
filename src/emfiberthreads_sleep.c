@@ -15,7 +15,8 @@
 
 #include "pthread-internal.h"
 
-void emfiberthreads_sleep(pthread_t *head) {
+int emfiberthreads_sleep(pthread_t *head) {
+    EMFT_INIT();
     emfiberthreads_next = emfiberthreads_self->list.next;
     if (*head)
         (*head)->list.prev = emfiberthreads_self;
@@ -25,4 +26,5 @@ void emfiberthreads_sleep(pthread_t *head) {
     emfiberthreads_self->list.next = *head;
     *head = emfiberthreads_self;
     pthread_yield();
+    return 0;
 }

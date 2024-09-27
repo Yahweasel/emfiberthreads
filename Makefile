@@ -22,6 +22,7 @@ OBJ=\
 	obj/pthread_cond_signal.o \
 	obj/pthread_cond_wait.o \
 	obj/pthread_cond_timedwait.o \
+	obj/emfiberthreads_init.o \
 	obj/emfiberthreads_sleep.o \
 	obj/emfiberthreads_wake.o \
 	obj/globals.o

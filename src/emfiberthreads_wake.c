@@ -15,8 +15,10 @@
 
 #include "pthread-internal.h"
 
-void emfiberthreads_wake(pthread_t *head) {
+int emfiberthreads_wake(pthread_t *head) {
     pthread_t cur;
+
+    EMFT_INIT();
 
     cur = *head;
     if (cur)
@@ -34,4 +36,5 @@ void emfiberthreads_wake(pthread_t *head) {
     }
 
     *head = NULL;
+    return 0;
 }

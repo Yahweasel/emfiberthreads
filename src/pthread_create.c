@@ -53,32 +53,10 @@ int pthread_create(
 
     (void) attr;
 
-    if (!emfiberthreads_mainFiber) {
-        void *asyncifyStack;
-        pthread_t cleanupThr;
-
-        /* No main fiber. Initialize it. */
-        emfiberthreads_mainFiber = calloc(1, sizeof(struct emfiber_pthread_t));
-        if (!emfiberthreads_mainFiber)
-            return errno;
-        emfiberthreads_mainFiber->list.next = emfiberthreads_mainFiber;
-        emfiberthreads_mainFiber->list.prev = emfiberthreads_mainFiber;
-
-        emfiberthreads_mainFiber->asyncifyStack = asyncifyStack =
-            calloc(EMFIBERTHREADS_ASYNCIFY_STACK_SIZE, 1);
-        if (!asyncifyStack)
-            return errno;
-
-        emscripten_fiber_init_from_current_context(
-            &emfiberthreads_mainFiber->fiber,
-            asyncifyStack, EMFIBERTHREADS_ASYNCIFY_STACK_SIZE
-        );
-
-        emfiberthreads_self = emfiberthreads_next = emfiberthreads_mainFiber;
-    }
+    EMFT_INIT();
 
     /* Allocate a new fiber. */
-    thr = calloc(1, sizeof(struct emfiber_pthread_t));
+    thr = calloc(1, sizeof(struct emfiberthreads_pthread_t));
     if (!thr)
         return errno;
     *thrPtr = thr;

@@ -16,6 +16,7 @@
 #include "pthread-internal.h"
 
 void pthread_exit(void *ret) {
+    emfiberthreads_init();
     emfiberthreads_self->exited = 1;
     emfiberthreads_self->ret = ret;
     if (emfiberthreads_self->joined) {
