@@ -31,7 +31,7 @@ attribution is required.
 
 libemfiberthreads lives by the motto “good enough is the enemy of just barely
 adequate”. I've only implemented exactly enough functionality to compile what I
-need.
+need (namely, [libav.js](https://github.com/Yahweasel/libav.js/)).
 
 Cooperative multitasking is not a substitute for preemption, but in reality,
 most threaded software doesn't actually need preemption. Without preemption, all
