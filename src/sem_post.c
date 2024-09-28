@@ -14,12 +14,11 @@
  */
 
 #include "pthread-internal.h"
+#include "../include/semaphore.h"
 
-int emfiberthreads_wake(pthread_t *head) {
-    while (*head) {
-        int ret;
-        ret = emfiberthreads_wake_one(head);
-        if (ret) return ret;
-    }
+int sem_post(sem_t *sem) {
+    if (sem->waiters)
+        return emfiberthreads_wake_one(&sem->waiters);
+    sem->value++;
     return 0;
 }

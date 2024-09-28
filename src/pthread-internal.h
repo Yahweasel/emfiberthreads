@@ -42,6 +42,9 @@ int emfiberthreads_sleep(pthread_t *);
 /* Wake a sleeping threadlist. */
 int emfiberthreads_wake(pthread_t *);
 
+/* Wake only one thread from a sleeping threadlist. */
+int emfiberthreads_wake_one(pthread_t *);
+
 /* The main fiber, set when the threading system initializes. */
 extern struct emfiberthreads_pthread_t emfiberthreads_mainFiber;
 

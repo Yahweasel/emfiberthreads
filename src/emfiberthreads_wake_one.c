@@ -15,11 +15,21 @@
 
 #include "pthread-internal.h"
 
-int emfiberthreads_wake(pthread_t *head) {
-    while (*head) {
-        int ret;
-        ret = emfiberthreads_wake_one(head);
-        if (ret) return ret;
+int emfiberthreads_wake_one(pthread_t *head) {
+    pthread_t cur;
+
+    EMFT_INIT();
+
+    cur = *head;
+    if (cur) {
+        emfiberthreads_next = cur;
+        *head = cur->list.next;
+
+        cur->list.prev = emfiberthreads_self;
+        cur->list.next = emfiberthreads_self->list.next;
+        emfiberthreads_self->list.next->list.prev = cur;
+        emfiberthreads_self->list.next = cur;
     }
+
     return 0;
 }

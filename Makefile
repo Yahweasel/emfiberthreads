@@ -22,9 +22,14 @@ OBJ=\
 	obj/pthread_cond_signal.o \
 	obj/pthread_cond_wait.o \
 	obj/pthread_cond_timedwait.o \
+	obj/sem_init.o \
+	obj/sem_wait.o \
+	obj/sem_trywait.o \
+	obj/sem_post.o \
 	obj/emfiberthreads_init.o \
 	obj/emfiberthreads_sleep.o \
 	obj/emfiberthreads_wake.o \
+	obj/emfiberthreads_wake_one.o \
 	obj/globals.o
 
 all: libemfiberthreads.a

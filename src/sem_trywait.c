@@ -13,13 +13,16 @@
  * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "pthread-internal.h"
+#include <errno.h>
 
-int emfiberthreads_wake(pthread_t *head) {
-    while (*head) {
-        int ret;
-        ret = emfiberthreads_wake_one(head);
-        if (ret) return ret;
+#include "pthread-internal.h"
+#include "../include/semaphore.h"
+
+int sem_trywait(sem_t *sem) {
+    EMFT_INIT();
+    if (sem->value) {
+        sem->value--;
+        return 0;
     }
-    return 0;
+    return EBUSY;
 }
