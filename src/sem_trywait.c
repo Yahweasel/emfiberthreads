@@ -19,7 +19,6 @@
 #include "../include/semaphore.h"
 
 int sem_trywait(sem_t *sem) {
-    EMFT_INIT();
     if (sem->value) {
         sem->value--;
         return 0;
