@@ -51,17 +51,7 @@ typedef struct pthread_mutex_t {
 } pthread_mutex_t;
 
 #define __DEFINED_pthread_once_t 1
-typedef struct pthread_once_t {
-    /**
-     * Lock for this once structure.
-     */
-    pthread_mutex_t lock;
-
-    /**
-     * Set to 1 when this once has been done.
-     */
-    unsigned char done;
-} pthread_once_t;
+typedef unsigned char pthread_once_t;
 
 #define __DEFINED_pthread_cond_t 1
 typedef struct pthread_cond_t {
@@ -79,7 +69,7 @@ typedef int pthread_mutexattr_t;
 typedef int pthread_condattr_t;
 
 #define PTHREAD_MUTEX_INITIALIZER { NULL, NULL }
-#define PTHREAD_ONCE_INIT { PTHREAD_MUTEX_INITIALIZER, 0 }
+#define PTHREAD_ONCE_INIT 0
 #define PTHREAD_COND_INITIALIZER { NULL }
 
 #include <time.h>

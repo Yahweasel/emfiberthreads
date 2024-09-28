@@ -16,19 +16,11 @@
 #include "pthread-internal.h"
 
 int pthread_once(pthread_once_t *once, void (*func)(void)) {
-    int ret;
-
-    if (once->done)
+    if (*once)
         return 0;
 
-    ret = pthread_mutex_lock(&once->lock);
-    if (ret != 0)
-        return ret;
-
+    *once = 1;
     func();
-    once->done = 1;
-
-    pthread_mutex_unlock(&once->lock);
 
     return 0;
 }
