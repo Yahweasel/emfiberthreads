@@ -17,7 +17,7 @@
 #include "../include/semaphore.h"
 
 int sem_init(sem_t *sem, int shared, unsigned int value) {
-    sem_t init = { PTHREAD_MUTEX_INITIALIZER, NULL, 0 };
+    sem_t init = { NULL, 0 };
 
     (void) shared;
     init.value = value;
