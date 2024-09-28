@@ -17,18 +17,9 @@
 #include "../include/semaphore.h"
 
 int sem_wait(sem_t *sem) {
-    EMFT_INIT();
     if (sem->value) {
         sem->value--;
         return 0;
     }
-    emfiberthreads_self->list.prev->list.next = emfiberthreads_self->list.next;
-    emfiberthreads_self->list.next->list.prev = emfiberthreads_self->list.prev;
-    emfiberthreads_self->list.prev = NULL;
-    emfiberthreads_self->list.next = sem->waiters;
-    if (sem->waiters)
-        sem->waiters->list.prev = emfiberthreads_self;
-    sem->waiters = emfiberthreads_self;
-    pthread_yield();
-    return 0;
+    return emfiberthreads_sleep(&sem->waiters);
 }
