@@ -15,7 +15,7 @@
 
 #include "pthread-internal.h"
 
-int pthread_mutex_lock(pthread_mutex_t *mutex) {
+int emfiber_pthread_mutex_lock(emfiber_pthread_mutex_t *mutex) {
     int ret;
 
     while (mutex->holder) {

@@ -15,7 +15,7 @@
 
 #include "pthread-internal.h"
 
-int pthread_join(pthread_t thr, void **ret) {
+int emfiber_pthread_join(emfiber_pthread_t thr, void **ret) {
     EMFT_INIT();
 
     while (!thr->exited) {
@@ -25,7 +25,7 @@ int pthread_join(pthread_t thr, void **ret) {
         emfiberthreads_self->list.prev->list.next = emfiberthreads_self->list.next;
         emfiberthreads_self->list.next->list.prev = emfiberthreads_self->list.prev;
         emfiberthreads_self->list.prev = emfiberthreads_self->list.next = NULL;
-        pthread_yield();
+        emfiber_pthread_yield();
     }
 
     if (ret)

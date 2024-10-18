@@ -15,7 +15,7 @@
 
 #include "pthread-internal.h"
 
-int emfiberthreads_wake(pthread_t *head) {
+int emfiberthreads_wake(emfiber_pthread_t *head) {
     while (*head) {
         int ret;
         ret = emfiberthreads_wake_one(head);

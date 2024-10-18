@@ -15,8 +15,8 @@
 
 #include "pthread-internal.h"
 
-int emfiberthreads_wake_one(pthread_t *head) {
-    pthread_t cur;
+int emfiberthreads_wake_one(emfiber_pthread_t *head) {
+    emfiber_pthread_t cur;
 
     EMFT_INIT();
 

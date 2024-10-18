@@ -15,7 +15,7 @@
 
 #include "pthread-internal.h"
 
-void pthread_exit(void *ret) {
+void emfiber_pthread_exit(void *ret) {
     emfiberthreads_init();
     emfiberthreads_self->exited = 1;
     emfiberthreads_self->ret = ret;
@@ -29,5 +29,5 @@ void pthread_exit(void *ret) {
     emfiberthreads_self->list.prev->list.next = emfiberthreads_self->list.next;
     emfiberthreads_self->list.next->list.prev = emfiberthreads_self->list.prev;
     emfiberthreads_self->list.prev = emfiberthreads_self->list.next = NULL;
-    pthread_yield();
+    emfiber_pthread_yield();
 }

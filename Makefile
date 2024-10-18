@@ -45,14 +45,19 @@ obj/%.o: src/%.c
 		-c $< -o $@
 
 install:
+	mkdir -p $(PREFIX)/include
+	install -m 0644 include/emft-pthread.h $(PREFIX)/include/emft-pthread.h
+	install -m 0644 include/emft-semaphore.h $(PREFIX)/include/emft-semaphore.h
+	mkdir -p $(PREFIX)/lib
+	install -m 0644 libemfiberthreads.a $(PREFIX)/lib/libemfiberthreads.a
+
+install-interpose: install
 	mkdir -p $(PREFIX)/include/sys
 	install -m 0644 include/pthread.h $(PREFIX)/include/pthread.h
 	install -m 0644 include/semaphore.h $(PREFIX)/include/semaphore.h
 	install -m 0644 include/signal.h $(PREFIX)/include/signal.h
 	install -m 0644 include/mqueue.h $(PREFIX)/include/mqueue.h
 	install -m 0644 include/sys/types.h $(PREFIX)/include/sys/types.h
-	mkdir -p $(PREFIX)/lib
-	install -m 0644 libemfiberthreads.a $(PREFIX)/lib/libemfiberthreads.a
 
 clean:
 	rm -rf obj

@@ -18,7 +18,7 @@
 
 #include "pthread-internal.h"
 
-void emfiberthreads_timeout_expiry(pthread_cond_t *cond, pthread_t thr) {
+void emfiberthreads_timeout_expiry(emfiber_pthread_cond_t *cond, emfiber_pthread_t thr) {
     /* Remove this from waiters. */
     if (cond->waiters == thr)
         cond->waiters = thr->list.next;
@@ -55,14 +55,14 @@ EM_JS(static void, emfiberthreads_pthread_mutex_timedwait_clearTimeout, (
     clearTimeout(timeout);
 });
 
-int pthread_cond_timedwait(
-    pthread_cond_t *cond, pthread_mutex_t *mutex, const struct timespec *abstime
+int emfiber_pthread_cond_timedwait(
+    emfiber_pthread_cond_t *cond, emfiber_pthread_mutex_t *mutex, const struct timespec *abstime
 ) {
     int ret;
     int timeoutReached;
     double timeout;
 
-    ret = pthread_mutex_unlock(mutex);
+    ret = emfiber_pthread_mutex_unlock(mutex);
     if (ret != 0)
         return ret;
 
@@ -78,7 +78,7 @@ int pthread_cond_timedwait(
     if (!timeoutReached)
         emfiberthreads_pthread_mutex_timedwait_clearTimeout(timeout);
 
-    ret = pthread_mutex_lock(mutex);
+    ret = emfiber_pthread_mutex_lock(mutex);
     if (ret != 0)
         return ret;
 

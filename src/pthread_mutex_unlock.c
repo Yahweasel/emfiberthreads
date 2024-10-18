@@ -15,7 +15,7 @@
 
 #include "pthread-internal.h"
 
-int pthread_mutex_unlock(pthread_mutex_t *mutex) {
+int emfiber_pthread_mutex_unlock(emfiber_pthread_mutex_t *mutex) {
     /* Quasi-FIXME: No check that we're actually holding the lock. */
     mutex->holder = NULL;
     return emfiberthreads_wake(&mutex->waiters);

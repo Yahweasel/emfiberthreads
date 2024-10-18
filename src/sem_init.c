@@ -1,7 +1,7 @@
 #include "pthread-internal.h"
 #include "../include/semaphore.h"
 
-int sem_init(sem_t *sem, int shared, unsigned int value) {
+int emfiber_sem_init(emfiber_sem_t *sem, int shared, unsigned int value) {
     (void) shared;
     sem->waiters = NULL;
     sem->value = value;

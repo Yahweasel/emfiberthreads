@@ -16,7 +16,7 @@
 #include "pthread-internal.h"
 #include "../include/semaphore.h"
 
-int sem_post(sem_t *sem) {
+int emfiber_sem_post(emfiber_sem_t *sem) {
     if (sem->waiters)
         return emfiberthreads_wake_one(&sem->waiters);
     sem->value++;

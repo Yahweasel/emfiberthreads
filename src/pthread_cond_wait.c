@@ -15,10 +15,10 @@
 
 #include "pthread-internal.h"
 
-int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex) {
+int emfiber_pthread_cond_wait(emfiber_pthread_cond_t *cond, emfiber_pthread_mutex_t *mutex) {
     int ret;
 
-    ret = pthread_mutex_unlock(mutex);
+    ret = emfiber_pthread_mutex_unlock(mutex);
     if (ret != 0)
         return ret;
 
@@ -26,7 +26,7 @@ int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex) {
     if (ret != 0)
         return ret;
 
-    ret = pthread_mutex_lock(mutex);
+    ret = emfiber_pthread_mutex_lock(mutex);
     if (ret != 0)
         return ret;
 

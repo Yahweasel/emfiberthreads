@@ -16,34 +16,15 @@
 #ifndef EMFIBERTHREADS_SEMAPHORE_H
 #define EMFIBERTHREADS_SEMAPHORE_H 1
 
-#include "pthread.h"
+#include "emft-semaphore.h"
 
-/**
- * emfiberthreads semaphore.
- */
-typedef struct emfiberthreads_sem_t {
-    /**
-     * Threads waiting on the semaphore.
-     */
-    pthread_t waiters;
-
-    /**
-     * Current value of the semaphore.
-     */
-    unsigned int value;
-} sem_t;
+typedef emfiber_sem_t sem_t;
 
 #define sem_init emfiberthreads_sem_init
-int sem_init(sem_t *, int, unsigned int);
 #define sem_wait emfiberthreads_sem_wait
-int sem_wait(sem_t *);
 #define sem_trywait emfiberthreads_sem_trywait
-int sem_trywait(sem_t *);
 #define sem_post emfiberthreads_sem_post
-int sem_post(sem_t *);
 #define sem_getvalue emfiberthreads_sem_getvalue
-static inline int sem_getvalue(sem_t *sem, int *value) { *value = (int) sem->value; return 0; }
 #define sem_destroy emfiberthreads_sem_destroy
-static inline int sem_destroy(sem_t *sem) { (void) sem; return 0; }
 
 #endif

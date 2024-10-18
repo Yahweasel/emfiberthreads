@@ -40,14 +40,14 @@ static void fiberEntry(void *argVP) {
     ret = arg->arg;
     free(arg);
 
-    pthread_exit(entry(ret));
+    emfiber_pthread_exit(entry(ret));
 }
 
-int pthread_create(
-    pthread_t *thrPtr, const pthread_attr_t *attr,
+int emfiber_pthread_create(
+    emfiber_pthread_t *thrPtr, const emfiber_pthread_attr_t *attr,
     void *(*entry)(void *), void *arg
 ) {
-    pthread_t thr;
+    emfiber_pthread_t thr;
     int ret;
     struct FiberEntryArg *feArg;
 

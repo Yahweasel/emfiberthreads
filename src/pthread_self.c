@@ -1,5 +1,5 @@
 #include "pthread-internal.h"
 
-pthread_t pthread_self() {
+emfiber_pthread_t emfiber_pthread_self() {
     return emfiberthreads_self;
 }

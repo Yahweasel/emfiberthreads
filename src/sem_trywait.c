@@ -18,7 +18,7 @@
 #include "pthread-internal.h"
 #include "../include/semaphore.h"
 
-int sem_trywait(sem_t *sem) {
+int emfiber_sem_trywait(emfiber_sem_t *sem) {
     if (sem->value) {
         sem->value--;
         return 0;

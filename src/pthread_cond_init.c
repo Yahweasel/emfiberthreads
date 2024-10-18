@@ -15,7 +15,7 @@
 
 #include "pthread-internal.h"
 
-int pthread_cond_init(pthread_cond_t *cond, const pthread_condattr_t *attr) {
+int emfiber_pthread_cond_init(emfiber_pthread_cond_t *cond, const emfiber_pthread_condattr_t *attr) {
     cond->waiters = NULL;
     return 0;
 }

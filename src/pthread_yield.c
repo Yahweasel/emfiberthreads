@@ -15,8 +15,8 @@
 
 #include "pthread-internal.h"
 
-int pthread_yield() {
-    pthread_t self;
+int emfiber_pthread_yield() {
+    emfiber_pthread_t self;
 
     EMFT_INIT();
 

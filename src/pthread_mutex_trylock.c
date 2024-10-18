@@ -17,7 +17,7 @@
 
 #include "pthread-internal.h"
 
-int pthread_mutex_trylock(pthread_mutex_t *mutex) {
+int emfiber_pthread_mutex_trylock(emfiber_pthread_mutex_t *mutex) {
     if (mutex->holder)
         return EBUSY;
     EMFT_INIT();

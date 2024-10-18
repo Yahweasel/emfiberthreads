@@ -15,7 +15,7 @@
 
 #include "pthread-internal.h"
 
-int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr) {
+int emfiber_pthread_mutex_init(emfiber_pthread_mutex_t *mutex, const emfiber_pthread_mutexattr_t *attr) {
     (void) attr;
 
     mutex->waiters = NULL;

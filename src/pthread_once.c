@@ -15,7 +15,7 @@
 
 #include "pthread-internal.h"
 
-int pthread_once(pthread_once_t *once, void (*func)(void)) {
+int emfiber_pthread_once(emfiber_pthread_once_t *once, void (*func)(void)) {
     if (*once)
         return 0;
 

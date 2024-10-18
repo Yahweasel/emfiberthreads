@@ -16,7 +16,7 @@
 #ifndef EMFIBERTHREADS_PTHREAD_INTERNAL_H
 #define EMFIBERTHREADS_PTHREAD_INTERNAL_H 1
 
-#include "../include/pthread.h"
+#include "../include/emft-pthread.h"
 
 struct emfiberthreads_pthread_t {
     struct emfiber_list_t list;
@@ -25,7 +25,7 @@ struct emfiberthreads_pthread_t {
 
     unsigned char exited;
     void *ret;
-    pthread_t joined;
+    emfiber_pthread_t joined;
 };
 
 /* Initialize fiberthreads. */
@@ -37,21 +37,21 @@ int emfiberthreads_init(void);
 } while (0)
 
 /* Go to sleep on a threadlist. */
-int emfiberthreads_sleep(pthread_t *);
+int emfiberthreads_sleep(emfiber_pthread_t *);
 
 /* Wake a sleeping threadlist. */
-int emfiberthreads_wake(pthread_t *);
+int emfiberthreads_wake(emfiber_pthread_t *);
 
 /* Wake only one thread from a sleeping threadlist. */
-int emfiberthreads_wake_one(pthread_t *);
+int emfiberthreads_wake_one(emfiber_pthread_t *);
 
 /* The main fiber, set when the threading system initializes. */
 extern struct emfiberthreads_pthread_t emfiberthreads_mainFiber;
 
 /* The current fiber. */
-extern pthread_t emfiberthreads_self;
+extern emfiber_pthread_t emfiberthreads_self;
 
 /* The *next* fiber, used as part of context switching. */
-extern pthread_t emfiberthreads_next;
+extern emfiber_pthread_t emfiberthreads_next;
 
 #endif
