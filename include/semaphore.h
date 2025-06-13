@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Yahweasel and contributors
+ * Copyright (C) 2024, 2025 Yahweasel and contributors
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted.
@@ -20,11 +20,11 @@
 
 typedef emfiber_sem_t sem_t;
 
-#define sem_init emfiberthreads_sem_init
-#define sem_wait emfiberthreads_sem_wait
-#define sem_trywait emfiberthreads_sem_trywait
-#define sem_post emfiberthreads_sem_post
-#define sem_getvalue emfiberthreads_sem_getvalue
-#define sem_destroy emfiberthreads_sem_destroy
+#define sem_init emfiber_sem_init
+#define sem_wait emfiber_sem_wait
+#define sem_trywait emfiber_sem_trywait
+#define sem_post emfiber_sem_post
+#define sem_getvalue emfiber_sem_getvalue
+#define sem_destroy emfiber_sem_destroy
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Yahweasel and contributors
+ * Copyright (C) 2024, 2025 Yahweasel and contributors
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted.
@@ -59,9 +59,9 @@ typedef int emfiber_pthread_attr_t;
 typedef int emfiber_pthread_mutexattr_t;
 typedef int emfiber_pthread_condattr_t;
 
-#define PTHREAD_MUTEX_INITIALIZER { NULL, NULL }
-#define PTHREAD_ONCE_INIT 0
-#define PTHREAD_COND_INITIALIZER { NULL }
+#define EMFIBER_PTHREAD_MUTEX_INITIALIZER { NULL, NULL }
+#define EMFIBER_PTHREAD_ONCE_INIT 0
+#define EMFIBER_PTHREAD_COND_INITIALIZER { NULL }
 
 #include <time.h>
 
