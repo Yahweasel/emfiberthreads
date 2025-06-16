@@ -14,7 +14,7 @@
  */
 
 #include "pthread-internal.h"
-#include "../include/semaphore.h"
+#include "../include/emft-semaphore.h"
 
 int emfiber_sem_post(emfiber_sem_t *sem) {
     if (sem->waiters)

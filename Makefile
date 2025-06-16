@@ -53,11 +53,11 @@ install:
 
 install-interpose: install
 	mkdir -p $(PREFIX)/include/sys
-	install -m 0644 include/pthread.h $(PREFIX)/include/pthread.h
-	install -m 0644 include/semaphore.h $(PREFIX)/include/semaphore.h
-	install -m 0644 include/signal.h $(PREFIX)/include/signal.h
-	install -m 0644 include/mqueue.h $(PREFIX)/include/mqueue.h
-	install -m 0644 include/sys/types.h $(PREFIX)/include/sys/types.h
+	install -m 0644 include/interpose/pthread.h $(PREFIX)/include/pthread.h
+	install -m 0644 include/interpose/semaphore.h $(PREFIX)/include/semaphore.h
+	install -m 0644 include/interpose/signal.h $(PREFIX)/include/signal.h
+	install -m 0644 include/interpose/mqueue.h $(PREFIX)/include/mqueue.h
+	install -m 0644 include/interpose/sys/types.h $(PREFIX)/include/sys/types.h
 
 clean:
 	rm -rf obj
