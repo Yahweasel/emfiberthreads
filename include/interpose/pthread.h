@@ -53,4 +53,8 @@ typedef emfiber_pthread_condattr_t pthread_condattr_t;
 #define pthread_cond_wait emfiber_pthread_cond_wait
 #define pthread_cond_timedwait emfiber_pthread_cond_timedwait
 
+#define PTHREAD_MUTEX_INITIALIZER EMFIBER_PTHREAD_MUTEX_INITIALIZER
+#define PTHREAD_ONCE_INIT EMFIBER_PTHREAD_ONCE_INIT
+#define PTHREAD_COND_INITIALIZER EMFIBER_PTHREAD_COND_INITIALIZER
+
 #endif
